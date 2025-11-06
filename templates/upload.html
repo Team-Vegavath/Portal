@@ -11,14 +11,30 @@
   <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="team" value="{{ team }}">
 
+    <!-- ZIP Upload -->
     <div class="mb-4">
       <label class="form-label">📦 Project ZIP File</label>
-      <input id="fileInput" type="file" name="file" class="form-control" accept=".zip" required>
+      <input id="fileInput" type="file" name="file" class="form-control" accept=".zip">
       <small style="color: rgba(255, 255, 255, 0.6); margin-top: 8px; display: block;">
-        Upload your complete project as a ZIP file
+        Upload your complete project as a ZIP file (optional if providing a GitHub link)
       </small>
     </div>
 
+    <!-- OR Divider -->
+    <div class="text-center my-3" style="color: #FFD580; font-weight: 600;">
+      — OR —
+    </div>
+
+    <!-- GitHub Repo Link -->
+    <div class="mb-4">
+      <label class="form-label">🔗 Public GitHub Repository URL</label>
+      <input id="repoUrlInput" type="url" name="repo_url" class="form-control" placeholder="https://github.com/username/repository">
+      <small style="color: rgba(255, 255, 255, 0.6); margin-top: 8px; display: block;">
+        Paste a public GitHub repo link (make sure it’s accessible without login)
+      </small>
+    </div>
+
+    <!-- Upload Progress -->
     <div class="progress mt-4" style="height:28px; display:none;">
       <div id="uploadBar" class="progress-bar" role="progressbar" style="width:0%">
         <span style="font-weight: 600;">0%</span>
@@ -27,10 +43,24 @@
 
     <div id="statusText" class="mt-3 text-center" style="color: #FFD580; font-weight: 500;"></div>
 
+    <!-- Submit -->
     <button id="submitBtn" class="btn btn-primary w-100 mt-4 py-3" type="submit">
       🚀 Submit Project
     </button>
   </form>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+    const repoUrlInput = document.getElementById('repoUrlInput');
+
+    form.addEventListener('submit', (e) => {
+      if (!fileInput.files.length && !repoUrlInput.value.trim()) {
+        e.preventDefault();
+        alert('Please upload a ZIP file or enter a GitHub repo link.');
+      }
+    });
+  </script>
 
   <script src="/static/js/upload-progress.js"></script>
 </div>
