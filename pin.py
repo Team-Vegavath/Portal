@@ -1,4 +1,4 @@
 import bcrypt
 
-pin = "Admin123".encode()
+pin = "<Textornum>".encode()
 print(bcrypt.hashpw(pin, bcrypt.gensalt()).decode())
