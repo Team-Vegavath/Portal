@@ -1,24 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="card mx-auto shadow p-4" style="max-width:480px;">
-    <h3>Team Verification</h3>
+<div class="card mx-auto shadow p-5 animate-fadeInUp" style="max-width:800px;">
+    <h3 class="mb-5 text-center" style="color: #FF6B35; font-size: 2.5rem;">Login to Portal</h3>
 
     {% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
+    <div class="alert alert-danger mb-4">{{ error }}</div>
     {% endif %}
 
     <form method="POST">
-        <label class="form-label">Team</label>
-        <select class="form-select" name="team">
-            {% for t in teams %}
-            <option value="{{ t }}">{{ t }}</option>
-            {% endfor %}
-        </select>
+        <div class="mb-4">
+            <label class="form-label">Team Name</label>
+            <select class="form-select" name="team">
+                {% for t in teams %}
+                <option value="{{ t }}">{{ t }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-        <label class="form-label mt-3">PIN</label>
-        <input type="password" class="form-control" name="pin" required>
+        <div class="mb-4">
+            <label class="form-label">PIN Code</label>
+            <input type="password" class="form-control" name="pin" placeholder="Enter your 6-digit PIN" required>
+        </div>
 
-        <button class="btn btn-primary w-100 mt-4">Verify</button>
+        <button class="btn btn-primary w-100 mt-4 py-3">Verify & Continue</button>
     </form>
 </div>
 {% endblock %}

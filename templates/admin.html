@@ -1,39 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Team Upload Status</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body class="bg-light">
+{% extends "layout.html" %}
+{% block content %}
+<div class="card mx-auto shadow p-5 animate-fadeInUp" style="max-width:900px;">
+    <h3 class="mb-4 text-center" style="color: #FF6B35;">🛡️ Admin Control Panel</h3>
+    <p class="text-center mb-4" style="color: #FFD580;">Manage team upload permissions</p>
 
-<div class="container py-5">
-    <div class="card shadow p-4">
-        <h3 class="mb-3 text-center">Upload Status Control</h3>
-
-        <table class="table table-bordered text-center align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>Team</th>
-                    <th>Status</th>
-                    <th>Control</th>
+    <div class="table-responsive">
+        <table class="table text-center align-middle" style="color: #FFFFFF;">
+            <thead>
+                <tr style="border-bottom: 2px solid rgba(255, 107, 53, 0.3);">
+                    <th style="color: #FFD580; text-transform: uppercase; letter-spacing: 0.05em; padding: 16px;">Team</th>
+                    <th style="color: #FFD580; text-transform: uppercase; letter-spacing: 0.05em; padding: 16px;">Status</th>
+                    <th style="color: #FFD580; text-transform: uppercase; letter-spacing: 0.05em; padding: 16px;">Control</th>
                 </tr>
             </thead>
             <tbody>
             {% for team, state in upload_state.items() %}
                 {% if team != "VEGAVATH ADS" %}
-                <tr>
-                    <td class="fw-bold">{{ team }}</td>
-                    <td>
+                <tr style="border-bottom: 1px solid rgba(255, 107, 53, 0.1);">
+                    <td class="fw-bold" style="padding: 16px;">{{ team }}</td>
+                    <td style="padding: 16px;">
                         {% if state %}
-                            <span class="badge bg-danger">⛔ Locked</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #FF5EAE 0%, #FF4500 100%); padding: 8px 16px; font-size: 0.9em;">⛔ Locked</span>
                         {% else %}
-                            <span class="badge bg-success">✅ Allowed</span>
+                            <span class="badge" style="background: linear-gradient(135deg, #00B7EB 0%, #8b5cf6 100%); padding: 8px 16px; font-size: 0.9em;">✅ Allowed</span>
                         {% endif %}
                     </td>
-                    <td>
-                        <form method="POST" action="/admin/reset/{{ team }}">
-                            <button class="btn btn-sm {% if state %}btn-primary{% else %}btn-warning{% endif %}">
-                                {% if state %}Unlock{% else %}Lock{% endif %}
+                    <td style="padding: 16px;">
+                        <form method="POST" action="/admin/reset/{{ team }}" style="display: inline;">
+                            <button class="btn btn-sm {% if state %}btn-admin-unlock{% else %}btn-admin-lock{% endif %}">
+                                {% if state %}🔓 Unlock{% else %}🔒 Lock{% endif %}
                             </button>
                         </form>
                     </td>
@@ -42,12 +37,10 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
 
-        <div class="text-center mt-4">
-            <a href="/" class="btn btn-secondary btn-sm">Return</a>
-        </div>
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary py-2 px-4">⬅️ Return to Portal</a>
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}
