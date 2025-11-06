@@ -1,0 +1,4 @@
+body { font-family: Inter, Arial, sans-serif; }
+.card { border-radius: 12px; }
+.progress { border-radius: 10px; overflow: hidden; }
+#logBox { background:#0d1117; color:#e6edf3; border-radius:8px; }
